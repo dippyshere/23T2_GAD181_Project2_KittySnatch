@@ -33,6 +33,7 @@ public class ItemSpawner : MonoBehaviour
         GameObject spawnedItem = Instantiate(randomPrefab, spawnPosition, Quaternion.identity);
 
         ItemController item = spawnedItem.GetComponent<ItemController>();
+        // ChatGPT - Formula
         item.maxCollectionBonus = Mathf.Pow(gameManager.scoreLevel, 2) * 100f;
     }
 }

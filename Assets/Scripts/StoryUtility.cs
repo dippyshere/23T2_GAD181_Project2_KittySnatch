@@ -15,18 +15,6 @@ public class StoryUtility : MonoBehaviour
 
     private int sceneIndex = 1;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void NextScene()
     {
         scene1.SetActive(false);

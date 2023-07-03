@@ -53,12 +53,6 @@ public class UpgradeManager : MonoBehaviour
         gameManager.isPaused = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateUI()
     {
         balanceText.text = "<sprite=0> " + gameManager.armController.scoreManager.energy.ToString("N0", CultureInfo.InvariantCulture);

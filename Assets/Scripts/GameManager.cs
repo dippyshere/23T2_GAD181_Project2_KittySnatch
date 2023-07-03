@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // ChatGPT - Formula
         armController.armSpeed = 1f + (playerSpeedLevel - 1) * 2f;
         armController.slamSpeedMultiplier = playerSlamLevel;
         StartSpawning();
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void StartSpawning()
     {
+        // ChatGPT - Formula
         currentSpawnDelay = maxSpawnDelay - (spawnLevel - 1) * spawnDelayDecreaseRate + 0.1f;
 
         Invoke("SpawnItem", currentSpawnDelay);
@@ -47,6 +49,7 @@ public class GameManager : MonoBehaviour
         itemSpawner.SpawnItem();
         if (!isPaused)
         {
+            // ChatGPT - Formula
             currentSpawnDelay = maxSpawnDelay - (spawnLevel - 1) * spawnDelayDecreaseRate + 0.1f;
             Invoke("SpawnItem", currentSpawnDelay);
         }
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseSpawnLevel()
     {
         spawnLevel++;
+        // ChatGPT - Formula
         currentSpawnDelay = maxSpawnDelay - (spawnLevel - 1) * spawnDelayDecreaseRate + 0.05f;
         UpdatePricing();
     }
@@ -68,6 +72,7 @@ public class GameManager : MonoBehaviour
     public void IncreasePlayerSpeedLevel()
     {
         playerSpeedLevel++;
+        // ChatGPT - Formula
         armController.armSpeed = 1f + (playerSpeedLevel - 1) * 2f;
         UpdatePricing();
     }
@@ -83,6 +88,7 @@ public class GameManager : MonoBehaviour
     {
         if (spawnLevel >= 5)
         {
+            // Purely random 6 digit number
             spawnLevelPrice = 2653967 * spawnLevel;
         }
         else

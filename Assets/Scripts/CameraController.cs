@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // From previous project
     public IEnumerator ShakeCamera(float intensity, float duration)
     {
         Vector3 originalPosition = transform.position;

@@ -1,3 +1,5 @@
+// Jacob wrote this for our last project
+
 using UnityEngine;
 
 public class DestroyOnExit : StateMachineBehaviour

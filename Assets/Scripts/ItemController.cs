@@ -31,6 +31,7 @@ public class ItemController : MonoBehaviour
         // decrease the collection bonus over time (the item is worth less the longer it's on the screen)
         // decrease exponentially, so it's worth 50% of the max value after 1 second, 25% after 2 seconds, etc.
         // limit the minimum value to 10% of the max value
+        // GitHub Copilot - Formula
         currentCollectionBonus = Mathf.Max(maxCollectionBonus * Mathf.Pow(0.5f, Time.time - startTime), maxCollectionBonus * 0.1f);
         collectionBonusText.text = currentCollectionBonus.ToString("N0", CultureInfo.InvariantCulture);
     }

@@ -81,6 +81,7 @@ public class ArmController : MonoBehaviour
             canMove = false;
             //if (!true)
             //{
+            //    ChatGPT (unused)
             //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, itemLayer);
             //    if (hit.collider != null)
             //    {
@@ -98,6 +99,7 @@ public class ArmController : MonoBehaviour
 
         if (canMove)
         {
+            // ChatGPT
             // Get the remapped mouse position within the safe zone
             Vector3 remappedMousePosition = GetRemappedMousePosition();
             // Move the arm with the mouse
@@ -112,6 +114,7 @@ public class ArmController : MonoBehaviour
         }
     }
 
+    // ChatGPT
     private Vector3 GetRemappedMousePosition()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -126,11 +129,13 @@ public class ArmController : MonoBehaviour
         return new Vector3(remappedX, remappedY, 0f);
     }
 
+    // ChatGPT
     private float Remap(float value, float fromMin, float fromMax, float toMin, float toMax)
     {
         return (value - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
     }
 
+    // ChatGPT
     private void OnDrawGizmos()
     {
         // Get the camera component
