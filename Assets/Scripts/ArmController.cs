@@ -14,6 +14,7 @@ public class ArmController : MonoBehaviour
     public Transform slamPosition;
     public ScoreManager scoreManager;
     public GameObject upgradeMenu;
+    public bool canSlam = true;
 
     private bool canMove = true;
     private bool checkResolution = true;
@@ -72,29 +73,32 @@ public class ArmController : MonoBehaviour
 
     private void Update()
     {
-        // Check for player input
-        if (Input.GetMouseButtonDown(0))
+        if (canSlam)
         {
-            animator.SetFloat("SlamSpeedMult", slamSpeedMultiplier);
-            animator.SetTrigger("Slam");
-            isSlamming = true;
-            canMove = false;
-            //if (!true)
-            //{
-            //    ChatGPT (unused)
-            //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, itemLayer);
-            //    if (hit.collider != null)
-            //    {
-            //        targetPosition = hit.collider.transform.position;
-            //    }
-            //}
-        }
-        // 2nd condition is a bug workaround
-        else if (!isSlamming && !Input.GetMouseButton(0) || animator.GetBool("Slam") && !Input.GetMouseButton(0) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-        {
-            animator.ResetTrigger("Slam");
-            isSlamming = false;
-            canMove = true;
+            // Check for player input
+            if (Input.GetMouseButtonDown(0))
+            {
+                animator.SetFloat("SlamSpeedMult", slamSpeedMultiplier);
+                animator.SetTrigger("Slam");
+                isSlamming = true;
+                canMove = false;
+                //if (!true)
+                //{
+                //    ChatGPT (unused)
+                //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, itemLayer);
+                //    if (hit.collider != null)
+                //    {
+                //        targetPosition = hit.collider.transform.position;
+                //    }
+                //}
+            }
+            // 2nd condition is a bug workaround
+            else if (!isSlamming && !Input.GetMouseButton(0) || animator.GetBool("Slam") && !Input.GetMouseButton(0) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                animator.ResetTrigger("Slam");
+                isSlamming = false;
+                canMove = true;
+            }
         }
 
         if (canMove)

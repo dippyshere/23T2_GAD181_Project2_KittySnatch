@@ -29,6 +29,8 @@ public class UpgradeManager : MonoBehaviour
     public CursorController cursorController;
 
     public Volume postProcessVolume;
+    public VolumeProfile defaultPostProcess;
+    public VolumeProfile upgradePostProcess;
 
     public bool upgradesAvailable = false;
 
@@ -41,7 +43,9 @@ public class UpgradeManager : MonoBehaviour
         cursorController.UnlockCursor();
         UpdateUI();
         Time.timeScale = 0f;
-        postProcessVolume.profile = Resources.Load<VolumeProfile>("PostProcessing Profile 1");
+        postProcessVolume.profile = upgradePostProcess;
+        gameManager.isPaused = true;
+        gameManager.armController.canSlam = false;
     }
 
     private void OnEnable()
@@ -49,8 +53,9 @@ public class UpgradeManager : MonoBehaviour
         cursorController.UnlockCursor();
         UpdateUI();
         Time.timeScale = 0f;
-        postProcessVolume.profile = Resources.Load<VolumeProfile>("PostProcessing Profile 1");
+        postProcessVolume.profile = upgradePostProcess;
         gameManager.isPaused = true;
+        gameManager.armController.canSlam = false;
     }
 
     public void UpdateUI()
@@ -166,7 +171,8 @@ public class UpgradeManager : MonoBehaviour
     {
         cursorController.LockCursor();
         Time.timeScale = 1f;
-        postProcessVolume.profile = Resources.Load<VolumeProfile>("PostProcessing Profile");
+        postProcessVolume.profile = defaultPostProcess;
         gameManager.isPaused = false;
+        gameManager.armController.canSlam = true;
     }
 }

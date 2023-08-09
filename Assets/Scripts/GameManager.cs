@@ -46,13 +46,13 @@ public class GameManager : MonoBehaviour
 
     private void SpawnItem()
     {
-        itemSpawner.SpawnItem();
         if (!isPaused)
         {
-            // ChatGPT - Formula
-            currentSpawnDelay = maxSpawnDelay - (spawnLevel - 1) * spawnDelayDecreaseRate + 0.1f;
-            Invoke("SpawnItem", currentSpawnDelay);
+            itemSpawner.SpawnItem();
         }
+        // ChatGPT - Formula
+        currentSpawnDelay = maxSpawnDelay - (spawnLevel - 1) * spawnDelayDecreaseRate + 0.1f;
+        Invoke("SpawnItem", currentSpawnDelay);
     }
 
     public void IncreaseSpawnLevel()
