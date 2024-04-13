@@ -1,12 +1,15 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public ItemSpawner itemSpawner;
     public ArmController armController;
     public UpgradeManager upgradeManager;
     public GameObject upgradeNotification;
+    public TextMeshProUGUI upgradeNotificationText;
     public float maxSpawnDelay = 5f;
     public float spawnDelayDecreaseRate = 0.1f; // delay decreases by this amount per spawn level
 
@@ -25,6 +28,11 @@ public class GameManager : MonoBehaviour
     private float currentSpawnDelay;
     private bool checkUpgrades = true;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         // ChatGPT - Formula
@@ -32,8 +40,11 @@ public class GameManager : MonoBehaviour
         armController.slamSpeedMultiplier = playerSlamLevel;
         StartSpawning();
         UpdatePricing();
-        upgradeManager.gameManager = this;
         StartCoroutine(checkForUpgrades());
+        if (Input.touchSupported)
+        {
+            upgradeNotificationText.text = "Tap / H to open menu";
+        }
     }
 
     private void StartSpawning()
@@ -41,7 +52,7 @@ public class GameManager : MonoBehaviour
         // ChatGPT - Formula
         currentSpawnDelay = maxSpawnDelay - (spawnLevel - 1) * spawnDelayDecreaseRate + 0.1f;
 
-        Invoke("SpawnItem", currentSpawnDelay);
+        Invoke(nameof(SpawnItem), currentSpawnDelay);
     }
 
     private void SpawnItem()
@@ -52,7 +63,7 @@ public class GameManager : MonoBehaviour
         }
         // ChatGPT - Formula
         currentSpawnDelay = maxSpawnDelay - (spawnLevel - 1) * spawnDelayDecreaseRate + 0.1f;
-        Invoke("SpawnItem", currentSpawnDelay);
+        Invoke(nameof(SpawnItem), currentSpawnDelay);
     }
 
     public void IncreaseSpawnLevel()

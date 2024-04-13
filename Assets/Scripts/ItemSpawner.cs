@@ -8,13 +8,6 @@ public class ItemSpawner : MonoBehaviour
     public Vector3 spawnAreaTopLeft;
     public Vector3 spawnAreaBottomRight;
 
-    private GameManager gameManager;
-
-    private void Start()
-    {
-        gameManager = FindObjectOfType<GameManager>();
-    }
-
     public void SpawnItem()
     {
         if (itemPrefabs.Length == 0)
@@ -34,6 +27,6 @@ public class ItemSpawner : MonoBehaviour
 
         ItemController item = spawnedItem.GetComponent<ItemController>();
         // ChatGPT - Formula
-        item.maxCollectionBonus = Mathf.Pow(gameManager.scoreLevel, 2) * 100f;
+        item.maxCollectionBonus = Mathf.Pow(GameManager.instance.scoreLevel, 2) * 100f;
     }
 }

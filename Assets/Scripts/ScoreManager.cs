@@ -12,12 +12,6 @@ public class ScoreManager : MonoBehaviour
 
     private long displayedEnergy = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         displayedEnergy = (long)Mathf.Ceil(Mathf.Lerp(displayedEnergy, energy, 0.06f));

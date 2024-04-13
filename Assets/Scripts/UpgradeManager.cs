@@ -34,18 +34,15 @@ public class UpgradeManager : MonoBehaviour
 
     public bool upgradesAvailable = false;
 
-    public GameManager gameManager;
-
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
         cursorController.UnlockCursor();
         UpdateUI();
         Time.timeScale = 0f;
         postProcessVolume.profile = upgradePostProcess;
-        gameManager.isPaused = true;
-        gameManager.armController.canSlam = false;
+        GameManager.instance.isPaused = true;
+        GameManager.instance.armController.canSlam = false;
     }
 
     private void OnEnable()
@@ -54,21 +51,21 @@ public class UpgradeManager : MonoBehaviour
         UpdateUI();
         Time.timeScale = 0f;
         postProcessVolume.profile = upgradePostProcess;
-        gameManager.isPaused = true;
-        gameManager.armController.canSlam = false;
+        GameManager.instance.isPaused = true;
+        GameManager.instance.armController.canSlam = false;
     }
 
     public void UpdateUI()
     {
-        balanceText.text = "<sprite=0> " + gameManager.armController.scoreManager.energy.ToString("N0", CultureInfo.InvariantCulture);
-        spawnLevelText.text = "Level: " + gameManager.spawnLevel.ToString();
-        scoreLevelText.text = "Level: " + gameManager.scoreLevel.ToString();
-        playerSpeedLevelText.text = "Level: " + gameManager.playerSpeedLevel.ToString();
-        playerSlamLevelText.text = "Level: " + gameManager.playerSlamLevel.ToString();
+        balanceText.text = "<sprite=0> " + GameManager.instance.armController.scoreManager.energy.ToString("N0", CultureInfo.InvariantCulture);
+        spawnLevelText.text = "Level: " + GameManager.instance.spawnLevel.ToString();
+        scoreLevelText.text = "Level: " + GameManager.instance.scoreLevel.ToString();
+        playerSpeedLevelText.text = "Level: " + GameManager.instance.playerSpeedLevel.ToString();
+        playerSlamLevelText.text = "Level: " + GameManager.instance.playerSlamLevel.ToString();
 
         upgradesAvailable = false;
 
-        if (gameManager.spawnLevel >= 6 || gameManager.armController.scoreManager.energy <= gameManager.spawnLevelPrice)
+        if (GameManager.instance.spawnLevel >= 6 || GameManager.instance.armController.scoreManager.energy <= GameManager.instance.spawnLevelPrice)
         {
             spawnLevelButton.interactable = false;
             //spawnLevelButton.gameObject.GetComponent<Image>().color = new Color(255, 116, 95, 255);
@@ -80,7 +77,7 @@ public class UpgradeManager : MonoBehaviour
             upgradesAvailable = true;
         }
 
-        if (gameManager.armController.scoreManager.energy <= gameManager.scoreLevelPrice)
+        if (GameManager.instance.armController.scoreManager.energy <= GameManager.instance.scoreLevelPrice)
         {
             scoreLevelButton.interactable = false;
             //scoreLevelButton.gameObject.GetComponent<Image>().color = new Color(255, 116, 95, 255);
@@ -92,7 +89,7 @@ public class UpgradeManager : MonoBehaviour
             upgradesAvailable = true;
         }
 
-        if (gameManager.playerSpeedLevel >= 20 || gameManager.armController.scoreManager.energy <= gameManager.playerSpeedLevelPrice)
+        if (GameManager.instance.playerSpeedLevel >= 20 || GameManager.instance.armController.scoreManager.energy <= GameManager.instance.playerSpeedLevelPrice)
         {
             playerSpeedLevelButton.interactable = false;
             //playerSpeedLevelButton.gameObject.GetComponent<Image>().color = new Color(255, 116, 95, 255);
@@ -104,7 +101,7 @@ public class UpgradeManager : MonoBehaviour
             upgradesAvailable = true;
         }
 
-        if (gameManager.playerSlamLevel >= 20 || gameManager.armController.scoreManager.energy <= gameManager.playerSlamLevelPrice)
+        if (GameManager.instance.playerSlamLevel >= 20 || GameManager.instance.armController.scoreManager.energy <= GameManager.instance.playerSlamLevelPrice)
         {
             playerSlamLevelButton.interactable = false;
             //playerSlamLevelButton.gameObject.GetComponent<Image>().color = new Color(255, 116, 95, 255);
@@ -116,48 +113,48 @@ public class UpgradeManager : MonoBehaviour
             upgradesAvailable = true;
         }
 
-        spawnLevelPrice.text = "<sprite=0>" + gameManager.spawnLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
-        scoreLevelPrice.text = "<sprite=0>" + gameManager.scoreLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
-        playerSpeedLevelPrice.text = "<sprite=0>" + gameManager.playerSpeedLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
-        playerSlamLevelPrice.text = "<sprite=0>" + gameManager.playerSlamLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
+        spawnLevelPrice.text = "<sprite=0>" + GameManager.instance.spawnLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
+        scoreLevelPrice.text = "<sprite=0>" + GameManager.instance.scoreLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
+        playerSpeedLevelPrice.text = "<sprite=0>" + GameManager.instance.playerSpeedLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
+        playerSlamLevelPrice.text = "<sprite=0>" + GameManager.instance.playerSlamLevelPrice.ToString("N0", CultureInfo.InvariantCulture);
     }
 
     public void UpgradeSpawnLevel()
     {
-        if (gameManager.armController.scoreManager.energy >= gameManager.spawnLevelPrice)
+        if (GameManager.instance.armController.scoreManager.energy >= GameManager.instance.spawnLevelPrice)
         {
-            gameManager.armController.scoreManager.DecreaseEnergy(gameManager.spawnLevelPrice);
-            gameManager.IncreaseSpawnLevel();
+            GameManager.instance.armController.scoreManager.DecreaseEnergy(GameManager.instance.spawnLevelPrice);
+            GameManager.instance.IncreaseSpawnLevel();
             UpdateUI();
         }
     }
 
     public void UpgradeScoreLevel()
     {
-        if (gameManager.armController.scoreManager.energy >= gameManager.scoreLevelPrice)
+        if (GameManager.instance.armController.scoreManager.energy >= GameManager.instance.scoreLevelPrice)
         {
-            gameManager.armController.scoreManager.DecreaseEnergy(gameManager.scoreLevelPrice);
-            gameManager.IncreaseScoreLevel();
+            GameManager.instance.armController.scoreManager.DecreaseEnergy(GameManager.instance.scoreLevelPrice);
+            GameManager.instance.IncreaseScoreLevel();
             UpdateUI();
         }
     }
 
     public void UpgradePlayerSpeedLevel()
     {
-        if (gameManager.armController.scoreManager.energy >= gameManager.playerSpeedLevelPrice)
+        if (GameManager.instance.armController.scoreManager.energy >= GameManager.instance.playerSpeedLevelPrice)
         {
-            gameManager.armController.scoreManager.DecreaseEnergy(gameManager.playerSpeedLevelPrice);
-            gameManager.IncreasePlayerSpeedLevel();
+            GameManager.instance.armController.scoreManager.DecreaseEnergy(GameManager.instance.playerSpeedLevelPrice);
+            GameManager.instance.IncreasePlayerSpeedLevel();
             UpdateUI();
         }
     }
 
     public void UpgradePlayerSlamLevel()
     {
-        if (gameManager.armController.scoreManager.energy >= gameManager.playerSlamLevelPrice)
+        if (GameManager.instance.armController.scoreManager.energy >= GameManager.instance.playerSlamLevelPrice)
         {
-            gameManager.armController.scoreManager.DecreaseEnergy(gameManager.playerSlamLevelPrice);
-            gameManager.IncreasePlayerSlamLevel();
+            GameManager.instance.armController.scoreManager.DecreaseEnergy(GameManager.instance.playerSlamLevelPrice);
+            GameManager.instance.IncreasePlayerSlamLevel();
             UpdateUI();
         }
     }
@@ -172,7 +169,7 @@ public class UpgradeManager : MonoBehaviour
         cursorController.LockCursor();
         Time.timeScale = 1f;
         postProcessVolume.profile = defaultPostProcess;
-        gameManager.isPaused = false;
-        gameManager.armController.canSlam = true;
+        GameManager.instance.isPaused = false;
+        GameManager.instance.armController.canSlam = true;
     }
 }

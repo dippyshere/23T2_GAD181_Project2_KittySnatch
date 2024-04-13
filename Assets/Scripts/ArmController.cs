@@ -118,6 +118,11 @@ public class ArmController : MonoBehaviour
         }
     }
 
+    public void ActivateUpgradeMenu()
+    {
+        upgradeMenu.SetActive(true);
+    }
+
     // ChatGPT
     private Vector3 GetRemappedMousePosition()
     {
